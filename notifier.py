@@ -1,9 +1,10 @@
 import datetime
+import pathlib
 import json
 from typing import List
 
 from notifypy import Notify
-from main import DATA_FILE_PATH
+from main import (DATA_FILE_PATH, CONTACTS_PHOTOS_PATH)
 
 
 def get_settings() -> dict:
@@ -78,6 +79,7 @@ def check_birthdays():
     """
     settings = get_settings()
     countdown_days = settings.get("countdown_days")
+    photo = settings.get('photo')
 
     today_date = datetime.date.today()
 
@@ -95,12 +97,21 @@ def check_birthdays():
                 )
             else:
                 message = "Say congrats"
-
-            notify(
+            
+            notification_options = dict(
                 default_notification_application_name="Birthday Reminder",
                 default_notification_title=title,
                 default_notification_message=message,
             )
+
+            if photo:
+                default_notification_icon = f"{CONTACTS_PHOTOS_PATH}{name.lower()}.png"
+                if pathlib.Path(default_notification_icon).exists():
+                    notification_options.update({"default_notification_icon": default_notification_icon})            
+            try:
+                notify(**notification_options)
+            except Exception:
+                pass
 
 
 if __name__ == "__main__":
