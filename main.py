@@ -18,6 +18,8 @@ def set_initial_data_settings():
 
 
 def add_birthday():
+    """Ask data to user in prompt for adding a contact with his birthday
+    """
     name = input("Type contact's name: ")
     date = input("Type date of birth (YYYY-MM-DD): ")
 
