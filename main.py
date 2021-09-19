@@ -4,7 +4,7 @@
 import os
 import json
 
-DATA_FILE_PATH = f"{os.environ['HOME']+os.path.sep}.birthdays_reminder/data.json"
+DATA_FILE_PATH = f"{os.environ['HOME']+os.path.sep}.birthdays_reminder{os.path.sep}data.json"
 
 def set_initial_data_settings():
     """Create a json file with initial settings
