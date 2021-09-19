@@ -13,3 +13,14 @@ def set_initial_data_settings(path=DATA_FILE_PATH):
 
     with open(path, 'w') as file:
         json.dump(initial_settings, file)
+
+
+def add_birthday():
+    name = input("Type contact's name: ")
+    date = input("Type date of birth (YYYY-MM-DD): ")
+
+    with open(DATA_FILE_PATH, 'r') as file:
+        data = json.load(file)
+    with open(DATA_FILE_PATH, 'w') as file:
+        data['contacts'][name] = date
+        json.dump(data, file)
