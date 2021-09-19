@@ -8,7 +8,7 @@ from main import DATA_FILE_PATH
 
 def get_settings() -> dict:
     """
-        Return a settings dictionary from data json file
+    Return a settings dictionary from data json file
     """
     with open(DATA_FILE_PATH, "r") as file:
         settings = json.load(file)["settings"]
@@ -74,7 +74,7 @@ def get_birthdays_by_countdown_days(countdown_days: int) -> List:
 
 def check_birthdays():
     """
-        Check for birthdays in data json file and notify according to settings
+    Check for birthdays in data json file and notify according to settings
     """
     settings = get_settings()
     countdown_days = settings.get("countdown_days")
