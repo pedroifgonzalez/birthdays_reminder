@@ -16,6 +16,8 @@ def set_initial_data_settings():
 
     with open(DATA_FILE_PATH, 'w') as file:
         json.dump(initial_settings, file)
+    
+    os.mkdir(CONTACTS_PHOTOS_PATH)
 
 
 def add_birthday():
