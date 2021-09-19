@@ -62,7 +62,7 @@ def get_birthdays_by_countdown_days(countdown_days: int) -> List:
 
         date_str_list = date_of_birth.split("-")
         date_int_list = list(map(int, date_str_list))
-        date = datetime.date(*date_int_list)
+        date = datetime.date(today_date.year, *date_int_list[1:])
 
         difference = date - today_date
 
@@ -101,3 +101,7 @@ def check_birthdays():
                 default_notification_title=title,
                 default_notification_message=message,
             )
+
+
+if __name__ == "__main__":
+    check_birthdays()
