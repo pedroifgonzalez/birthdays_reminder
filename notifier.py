@@ -7,7 +7,9 @@ from main import DATA_FILE_PATH
 
 
 def get_settings() -> dict:
-
+    """
+        Return a settings dictionary from data json file
+    """
     with open(DATA_FILE_PATH, "r") as file:
         settings = json.load(file)["settings"]
 
@@ -15,6 +17,14 @@ def get_settings() -> dict:
 
 
 def get_birthdays_by_date(date: str) -> List:
+    """Returns a list of contacts names whose birthdays are on a specific date
+
+    Args:
+        date (str): a date formatted in YYYY-MM-DD
+
+    Returns:
+        List: a list with contacts names
+    """
     birthdays_list = []
 
     with open(DATA_FILE_PATH, "r") as file:
@@ -33,6 +43,14 @@ def notify(*args, **kwargs):
 
 
 def get_birthdays_by_countdown_days(countdown_days: int) -> List:
+    """Returns a list of names with n days remaining for their birthdays
+
+    Args:
+        countdown_days (int): days remaining for the birthday
+
+    Returns:
+        List: a list with contacts names
+    """
     birthdays_list = []
 
     with open(DATA_FILE_PATH, "r") as file:
@@ -55,6 +73,9 @@ def get_birthdays_by_countdown_days(countdown_days: int) -> List:
 
 
 def check_birthdays():
+    """
+        Check for birthdays in data json file and notify according to settings
+    """
     settings = get_settings()
     countdown_days = settings.get("countdown_days")
 
