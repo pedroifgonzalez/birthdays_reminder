@@ -7,6 +7,10 @@ from notifypy import Notify
 from main import (DATA_FILE_PATH, CONTACTS_PHOTOS_PATH)
 
 CONGRATS_MESSAGE = "Say congrats!!"
+COUNTDOWN_TRANSLATIONS = {
+    1: "Tomorrow!",
+    7: "In a week!"
+}
 
 def get_settings() -> dict:
     """
