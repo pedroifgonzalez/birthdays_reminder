@@ -1,5 +1,12 @@
+# main.py
+#!/usr/bin/env python3
 """
     Main file to perform writing operations
+
+    Available functions:
+    - set_initial_data_settings
+    - add_birthday
+    - add_anniversary
 """
 import os
 import json
