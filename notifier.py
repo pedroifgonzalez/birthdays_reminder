@@ -4,13 +4,11 @@ import json
 from typing import List
 
 from notifypy import Notify
-from main import (DATA_FILE_PATH, CONTACTS_PHOTOS_PATH)
+from main import DATA_FILE_PATH, CONTACTS_PHOTOS_PATH
 
 CONGRATS_MESSAGE = "Say congrats!!"
-COUNTDOWN_TRANSLATIONS = {
-    1: "Tomorrow!",
-    7: "In a week!"
-}
+COUNTDOWN_TRANSLATIONS = {1: "Tomorrow!", 7: "In a week!"}
+
 
 def get_settings() -> dict:
     """
@@ -42,6 +40,7 @@ def get_birthdays_by_date(date: str) -> List:
 
     return birthdays_list
 
+
 def get_anniversaries_by_date(date: str) -> List:
     """Returns a list of anniversaries on a specific date
 
@@ -63,6 +62,7 @@ def get_anniversaries_by_date(date: str) -> List:
             anniversaries_list.append(subject)
 
     return anniversaries_list
+
 
 def notify(*args, **kwargs):
     notification = Notify(*args, **kwargs)
@@ -98,6 +98,7 @@ def get_birthdays_by_countdown_days(countdown_days: int) -> List:
 
     return birthdays_list
 
+
 def get_anniversaries_by_countdown_days(countdown_days: int) -> List:
     """Returns a list of anniversaries with n days remaining
 
@@ -123,7 +124,7 @@ def get_anniversaries_by_countdown_days(countdown_days: int) -> List:
         difference = date - today_date
 
         if difference.days == countdown_days:
-            subject += f' No: {today_date.year - date_int_list[0]}'
+            subject += f" No: {today_date.year - date_int_list[0]}"
             anniversaries_list.append(subject)
 
     return anniversaries_list
@@ -135,7 +136,7 @@ def check_birthdays():
     """
     settings = get_settings()
     countdown_days = settings.get("countdown_days")
-    photo = settings.get('photo')
+    photo = settings.get("photo")
 
     today_date = datetime.date.today()
 
@@ -154,7 +155,7 @@ def check_birthdays():
                     message = f"{countdown_days} days remaining"
             else:
                 message = CONGRATS_MESSAGE
-            
+
             notification_options = dict(
                 default_notification_application_name="Birthday Reminder",
                 default_notification_title=title,
@@ -164,11 +165,14 @@ def check_birthdays():
             if photo:
                 default_notification_icon = f"{CONTACTS_PHOTOS_PATH}{name.lower()}.png"
                 if pathlib.Path(default_notification_icon).exists():
-                    notification_options.update({"default_notification_icon": default_notification_icon})            
+                    notification_options.update(
+                        {"default_notification_icon": default_notification_icon}
+                    )
             try:
                 notify(**notification_options)
             except Exception:
                 pass
+
 
 def check_anniversaries():
     """
@@ -183,7 +187,7 @@ def check_anniversaries():
         anniversaries = get_anniversaries_by_countdown_days(countdown_days)
     else:
         anniversaries = get_anniversaries_by_date(str(today_date))
-    
+
     if anniversaries:
         for subject in anniversaries:
             title = subject
@@ -194,7 +198,7 @@ def check_anniversaries():
                     message = f"{countdown_days} days remaining"
             else:
                 message = CONGRATS_MESSAGE
-            
+
             notification_options = dict(
                 default_notification_application_name="Anniversary Reminder",
                 default_notification_title=title,
@@ -205,6 +209,7 @@ def check_anniversaries():
                 notify(**notification_options)
             except Exception:
                 pass
+
 
 if __name__ == "__main__":
     check_birthdays()
