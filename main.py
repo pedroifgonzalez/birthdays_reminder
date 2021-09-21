@@ -32,3 +32,15 @@ def add_birthday():
     with open(DATA_FILE_PATH, 'w') as file:
         data['contacts'][name] = date
         json.dump(data, file)
+
+def add_anniversary():
+    """Ask data to user in prompt for adding an anniversary
+    """
+    subject = input("Type anniversary's subject: ")
+    date = input("Type date: ")
+
+    with open(DATA_FILE_PATH, 'r') as file:
+        data = json.load(file)
+    with open(DATA_FILE_PATH, 'w') as file:
+        data['anniversaries'][subject] = date
+        json.dump(data, file)
