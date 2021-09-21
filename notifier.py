@@ -6,6 +6,7 @@ from typing import List
 from notifypy import Notify
 from main import (DATA_FILE_PATH, CONTACTS_PHOTOS_PATH)
 
+CONGRATS_MESSAGE = "Say congrats!!"
 
 def get_settings() -> dict:
     """
@@ -144,7 +145,7 @@ def check_birthdays():
                     f"{countdown_days} day{'s' if countdown_days>1 else ''} remaining"
                 )
             else:
-                message = "Say congrats"
+                message = CONGRATS_MESSAGE
             
             notification_options = dict(
                 default_notification_application_name="Birthday Reminder",
