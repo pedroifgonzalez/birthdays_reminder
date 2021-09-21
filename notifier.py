@@ -37,6 +37,25 @@ def get_birthdays_by_date(date: str) -> List:
 
     return birthdays_list
 
+def get_anniversaries_by_date(date: str) -> List:
+    """Returns a list of anniversaries on a specific date
+
+    Args:
+        date (str): a date formatted in YYYY-MM-DD
+
+    Returns:
+        List: a list with anniversaries
+    """
+    anniversaries_list = []
+
+    with open(DATA_FILE_PATH, "r") as file:
+        anniversaries = json.load(file)["anniversaries"]
+
+    for subject, anniversary_date in anniversaries.items():
+        if anniversary_date == date:
+            anniversaries_list.append(subject)
+
+    return anniversaries_list
 
 def notify(*args, **kwargs):
     notification = Notify(*args, **kwargs)
