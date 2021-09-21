@@ -91,6 +91,35 @@ def get_birthdays_by_countdown_days(countdown_days: int) -> List:
 
     return birthdays_list
 
+def get_anniversaries_by_countdown_days(countdown_days: int) -> List:
+    """Returns a list of anniversaries with n days remaining
+
+    Args:
+        countdown_days (int): days remaining for the anniversary
+
+    Returns:
+        List: a list with anniversaries
+    """
+    anniversaries_list = []
+
+    with open(DATA_FILE_PATH, "r") as file:
+        anniversaries = json.load(file)["anniversaries"]
+
+    today_date = datetime.date.today()
+
+    for subject, anniversary_date in anniversaries.items():
+
+        date_str_list = anniversary_date.split("-")
+        date_int_list = list(map(int, date_str_list))
+        date = datetime.date(today_date.year, *date_int_list[1:])
+
+        difference = date - today_date
+
+        if difference.days == countdown_days:
+            anniversaries_list.append(subject)
+
+    return anniversaries_list
+
 
 def check_birthdays():
     """
