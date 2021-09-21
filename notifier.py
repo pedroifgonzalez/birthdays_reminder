@@ -53,7 +53,9 @@ def get_anniversaries_by_date(date: str) -> List:
         anniversaries = json.load(file)["anniversaries"]
 
     for subject, anniversary_date in anniversaries.items():
-        if anniversary_date == date:
+        anniversary_month_and_day = anniversary_date.split("-")[1:]
+        date_month_and_day = date.split("-")[1:]
+        if anniversary_month_and_day == date_month_and_day:
             anniversaries_list.append(subject)
 
     return anniversaries_list
