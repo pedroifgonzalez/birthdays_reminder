@@ -13,6 +13,7 @@ def set_initial_data_settings():
     initial_settings = dict()
     initial_settings['settings'] = dict(photo=True, repeat=False,  countdown_days=1)
     initial_settings['contacts'] = {}
+    initial_settings['anniversaries'] = {}
 
     with open(DATA_FILE_PATH, 'w') as file:
         json.dump(initial_settings, file)
