@@ -148,9 +148,10 @@ def check_birthdays():
         for name in birthdays:
             title = f"Birthday of {name}"
             if countdown_days:
-                message = (
-                    f"{countdown_days} day{'s' if countdown_days>1 else ''} remaining"
-                )
+                if countdown_days in COUNTDOWN_TRANSLATIONS:
+                    message = f"{COUNTDOWN_TRANSLATIONS.get(countdown_days)}"
+                else:
+                    message = f"{countdown_days} days remaining"
             else:
                 message = CONGRATS_MESSAGE
             
@@ -187,9 +188,10 @@ def check_anniversaries():
         for subject in anniversaries:
             title = subject
             if countdown_days:
-                message = (
-                    f"{countdown_days} day{'s' if countdown_days>1 else ''} remaining"
-                )
+                if countdown_days in COUNTDOWN_TRANSLATIONS:
+                    message = f"{COUNTDOWN_TRANSLATIONS.get(countdown_days)}"
+                else:
+                    message = f"{countdown_days} days remaining"
             else:
                 message = CONGRATS_MESSAGE
             
