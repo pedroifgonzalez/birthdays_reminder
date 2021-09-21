@@ -162,6 +162,40 @@ def check_birthdays():
             except Exception:
                 pass
 
+def check_anniversaries():
+    """
+    Check for anniversaries in data json file and notify according to settings
+    """
+    settings = get_settings()
+    countdown_days = settings.get("countdown_days")
+
+    today_date = datetime.date.today()
+
+    if countdown_days:
+        anniversaries = get_anniversaries_by_countdown_days(countdown_days)
+    else:
+        anniversaries = get_anniversaries_by_date(str(today_date))
+    
+    if anniversaries:
+        for subject in anniversaries:
+            title = subject
+            if countdown_days:
+                message = (
+                    f"{countdown_days} day{'s' if countdown_days>1 else ''} remaining"
+                )
+            else:
+                message = CONGRATS_MESSAGE
+            
+            notification_options = dict(
+                default_notification_application_name="Anniversary Reminder",
+                default_notification_title=title,
+                default_notification_message=message,
+            )
+
+            try:
+                notify(**notification_options)
+            except Exception:
+                pass
 
 if __name__ == "__main__":
     check_birthdays()
