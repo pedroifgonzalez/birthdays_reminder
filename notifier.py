@@ -199,3 +199,4 @@ def check_anniversaries():
 
 if __name__ == "__main__":
     check_birthdays()
+    check_anniversaries()
